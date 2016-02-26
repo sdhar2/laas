@@ -1,0 +1,9 @@
+[
+{
+        "componentName":    "LSF",
+        "componentDescr":   "ARRIS Cloud Platform: Logstash-forwarder",
+        "containerName":    "arrs/arrs-cloud-base-logstash-forwarder",
+        "componentVersion": "2.1.0.0",
+        "installFileBase":  "arrs-cloud-logging-lsf"
+	}
+]

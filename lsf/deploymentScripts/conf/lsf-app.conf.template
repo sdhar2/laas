@@ -1,0 +1,239 @@
+{
+  "files": [
+    {
+      "paths": [ "/var/log/rabbitmq/startup*" ],
+      "fields": 
+      {
+        "type": "rabbitmqStartupLog",
+        "application": "rabbitmq",
+        "source": "$NODE_NAME",
+        "logFormat": "rabbitmqFormat"
+      }
+    },
+    {
+      "paths": [ "/var/log/rabbitmq/rabbit*" ],
+      "fields":
+      {
+        "type": "rabbitmqLog",
+        "application": "rabbitmq",
+        "source": "$NODE_NAME",
+        "logFormat": "rabbitmqFormat"
+      }
+    },
+
+    {
+      "paths": [ "/var/log/pgpool/pgpool.log*" ],
+      "fields": 
+      {
+        "type": "pgpoolLog",
+        "application": "pgpool",
+        "source": "$NODE_NAME",
+        "logFormat": "pgpoolLogFormat"
+      }
+    },
+
+    {
+      "paths": [ "/var/lib/pgsql/9.3/data/pg_log/postgresql-*.log" ],
+      "fields": 
+      {
+        "type": "postgresSQLLog",
+	"application": "postgres",
+	"source": "$NODE_NAME",
+	"logFormat": "postgresLogFormat"
+      }
+    },
+
+    {
+      "paths": [ "/var/log/postgres/postgres.log*" ],
+      "fields": 
+      {
+        "type": "postgresLog",
+        "application": "postgres",
+        "source": "$NODE_NAME",
+        "logFormat": "postgresLogFormat"
+      }
+    },
+
+    {
+      "paths": [ "/var/opt/app-observer/logs/log.txt*" ],
+      "fields": 
+      {
+        "type": "appObserverLog",
+        "application": "appObserver",
+        "source": "$NODE_NAME",
+        "logFormat": "advisorLogFormat"
+      }
+    },
+    {
+      "paths": [ "/var/opt/app-observer-pgpool/logs/log.txt*" ],
+      "fields": 
+      {
+        "type": "appObserverLog",
+        "application": "appObserver",
+        "source": "$NODE_NAME",
+        "logFormat": "advisorLogFormat"
+      }
+    },
+    {
+      "paths": [ "/var/opt/app-observer-postgres/logs/log.txt*" ],
+      "fields": 
+      {
+        "type": "appObserverLog",
+        "application": "appObserver",
+        "source": "$NODE_NAME",
+        "logFormat": "advisorLogFormat"
+      }
+    },
+    {
+      "paths": [ "/var/opt/app-observer-rabbitmq/logs/log.txt*" ],
+      "fields": 
+      {
+        "type": "appObserverLog",
+        "application": "appObserver",
+        "source": "$NODE_NAME",
+        "logFormat": "advisorLogFormat"
+      }
+    },
+    {
+      "paths": [ "/var/opt/app-observer-nginx/logs/log.txt*" ],
+      "fields": 
+      {
+        "type": "appObserverLog",
+        "application": "appObserver",
+        "source": "$NODE_NAME",
+        "logFormat": "advisorLogFormat"
+      }
+    },
+    {
+      "paths": [ "/var/opt/app-observer-haproxy/logs/log.txt*" ],
+      "fields": 
+      {
+        "type": "appObserverLog",
+        "application": "appObserver",
+        "source": "$NODE_NAME",
+        "logFormat": "advisorLogFormat"
+      }
+    },
+    {
+      "paths": [ "/var/opt/app-observer-etcd/logs/log.txt*" ],
+      "fields": 
+      {
+        "type": "appObserverLog",
+        "application": "appObserver",
+        "source": "$NODE_NAME",
+        "logFormat": "advisorLogFormat"
+      }
+    },
+    {
+      "paths": [ "/var/opt/app-observer-zookeeper/logs/log.txt*" ],
+      "fields": 
+      {
+        "type": "appObserverLog",
+        "application": "appObserver",
+        "source": "$NODE_NAME",
+        "logFormat": "advisorLogFormat"
+      }
+    },
+    
+    {
+      "paths": [ "/var/log/nginx/error.log" ],
+      "fields": 
+      {
+        "type": "nginxErrorLog",
+        "application": "nginx",
+        "source": "$NODE_NAME",
+        "logFormat": "nginxLogFormat"
+      }
+    },
+
+    {
+      "paths": [ "/usr/local/advisor/logs/log.txt*" ],
+      "fields": 
+      {
+        "type": "advisorServerLog",
+        "application": "advisorServer",
+        "source": "$NODE_NAME",
+        "logFormat": "advisorLogFormat"
+      }
+    },
+
+    {
+      "paths": [ "/var/log/etcd/etcdDatabase.log" ],
+      "fields": 
+      {
+        "type": "etcdDatabaseLog",
+        "source": "$NODE_NAME",
+        "logFormat": "logStandardFormat"
+      }
+    },
+    {
+      "paths": [ "/var/log/etcd/etcdLbaas.log" ],
+      "fields": 
+      {
+        "type": "etcdLbaasLog",
+        "source": "$NODE_NAME",
+        "logFormat": "logStandardFormat"
+      }
+    },
+    {
+      "paths": [ "/var/log/etcd/etcdLaas.log" ],
+      "fields": 
+      {
+        "type": "etcdLaasLog",
+        "source": "$NODE_NAME",
+        "logFormat": "logStandardFormat"
+      }
+    },
+
+    {
+      "paths": [ "/var/log/zookeeper/zookeeper.log" ],
+      "fields": 
+      {
+        "type": "zookeeperLog",
+        "application": "zookeeper",
+        "source": "$NODE_NAME",
+        "logFormat": "zookeeperLogFormat"
+      }
+    },
+    {
+      "paths": [ "/tmp/zookeeper.log" ],
+      "fields": 
+      {
+        "type": "zookeeperLog",
+        "application": "zookeeper",
+        "source": "$NODE_NAME",
+        "logFormat": "zookeeperLogFormat"
+      }
+    },
+    {
+      "paths": [ "/opt/code_controller/logs/application.log" ],
+      "fields":
+      {
+        "type": "codeControllerLog",
+        "application": "CodeController",
+        "source": "$NODE_NAME",
+        "logFormat": "codeControllerLogFormat"
+      }
+    },
+    {
+      "paths": [ "/opt/lbaas_api/logs/application.log" ],
+      "fields":
+      {
+        "type": "lbApiLog",
+        "application": "LbApi",
+        "source": "$NODE_NAME",
+        "logFormat": "codeControllerLogFormat"
+      }
+    },
+    {
+      "paths": [ "/opt/dbaas_api/logs/application.log" ],
+      "fields":
+      {
+        "type": "DbApiLog",
+        "application": "DbApi",
+        "source": "$NODE_NAME",
+        "logFormat": "codeControllerLogFormat"
+      }
+    }
+  ]
+}

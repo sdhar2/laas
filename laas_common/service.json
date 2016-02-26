@@ -1,0 +1,23 @@
+[
+	{
+	 "serviceName" : "laas",
+	 "serviceVersion": "2.0.4",
+         "serviceReleaseArtifact": "cloud-platform-logging",
+	 "releasedArtifacts":
+	  [
+	    {
+   		  "arrs/arrs-cloud-base-elk": "3.0.0.28",
+   		  "arrs/arrs-cloud-base-elk-app-monitor": "1.0.0.6",
+   		  "arrs/arrs-cloud-base-logstash-forwarder": "2.1.0.2"     	  
+        }
+	  ],
+	  "releaseDependency":
+	  [
+	    {
+	  	"monaas": "2.0.0",
+ 		"srdaas": "2.0.0",
+ 		"paas" : "2.0.0"
+        }
+	  ]
+	}
+]
