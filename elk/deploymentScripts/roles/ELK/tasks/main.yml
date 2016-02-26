@@ -1,0 +1,54 @@
+---
+    - name: create ELK folder and set necessary permissions if it does not exist
+      file: path=/var/opt/elk state=directory mode=777
+    - name: copy the ELK compose file
+      copy: src=elk-compose.yml dest=/arris/compose/elk-compose.yml mode=0755
+    - name: update the host ip on compose file
+      command: sed -i "s/HOST_IP_MACRO/{{ansible_eth0.ipv4.address}}/g" /arris/compose/elk-compose.yml
+    - name: update the host name on compose file
+      command: sed -i "s/HOST_NAME_MACRO/{{ansible_hostname}}/g" /arris/compose/elk-compose.yml      
+    - name: update the ES heap size on compose file for multi-VM environment
+      command: sed -i "s/ES_HEAP_SIZE_MACRO/8g/g" /arris/compose/elk-compose.yml
+      when: single_vm_deployment == "no"
+    - name: update the ES heap size on compose file for single VM environment
+      command: sed -i "s/ES_HEAP_SIZE_MACRO/2g/g" /arris/compose/elk-compose.yml
+      when: single_vm_deployment == "yes"
+    - name: update the LS heap size on compose file for multi-VM environment
+      command: sed -i "s/LS_HEAP_SIZE_MACRO/2g/g" /arris/compose/elk-compose.yml
+      when: single_vm_deployment == "no"
+    - name: update the LS heap size on compose file for single VM environment
+      command: sed -i "s/LS_HEAP_SIZE_MACRO/1g/g" /arris/compose/elk-compose.yml
+      when: single_vm_deployment == "yes"
+    - name: update the number of nodes in cluster on compose file for multi-VM environment
+      command: sed -i "s/NUM_CLUSTER_NODES_MACRO/3/g" /arris/compose/elk-compose.yml
+      when: single_vm_deployment == "no"
+    - name: update the number of nodes in cluster on compose file for single VM environment
+      command: sed -i "s/NUM_CLUSTER_NODES_MACRO/1/g" /arris/compose/elk-compose.yml
+      when: single_vm_deployment == "yes"
+    - name: Grab iptables rules for survey of firewall (INPUT rules only)
+      shell: iptables -L INPUT -n
+      register: iptablesinputtablerules
+      always_run: yes
+    - name: punch the holes in the firewall
+      command: iptables -I INPUT -p tcp --dport {{ item }} -j ACCEPT
+      when: iptablesinputtablerules.stdout.find("dpt:{{ item }}") == -1
+      with_items:
+         - 443
+         - 9000
+         - 9200
+         - 9300
+         - 8575
+         - 8577
+         - 7505
+      notify: save iptables
+    - name: pull the docker images from the compose file
+      command: docker-compose -f /arris/compose/elk-compose.yml pull
+      async: 180
+    - name: start the compose file on primary host
+      command: docker-compose -f /arris/compose/elk-compose.yml up -d
+      when: inventory_hostname == "{{ play_hosts[0] }}"
+    - wait_for: timeout=30
+    - name: start the compose file on standby host(s)
+      shell: docker-compose -f /arris/compose/elk-compose.yml up -d 
+      when: single_vm_deployment == "no" and inventory_hostname != "{{ play_hosts[0] }}"     
+    - wait_for: timeout=30

@@ -1,0 +1,7 @@
+---
+- name: Deploy elk service on laas
+  hosts: elk
+  sudo: true
+  remote_user: fldengr
+  roles:
+     - ELK

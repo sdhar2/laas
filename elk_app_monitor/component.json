@@ -1,0 +1,9 @@
+[
+	{
+        "componentName":    "elk-app-monitor",
+        "componentDescr":   "ARRIS Cloud Platform: ELK Application Monitor",
+        "containerName":    "arrs/arrs-cloud-base-elk-app-monitor",
+        "componentVersion": "1.0.0.0",
+        "installFileBase":  "arrs-cloud-logging-elk-appmonitor"
+	}
+]

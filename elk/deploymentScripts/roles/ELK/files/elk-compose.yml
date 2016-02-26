@@ -1,0 +1,81 @@
+elk:
+  image: dockerrepo:5000/arrs/arrs-cloud-base-elk:3.0.0.5
+  restart: always
+  privileged: true
+  log_driver: "json-file"
+  log_opt:
+   max-size: "100m"
+   max-file: "10"
+  ports:
+   - "443:443"
+   - "9000:9000"
+   - "9200:9200"
+   - "9300:9300"
+  environment:
+   ES_HEAP_SIZE: ES_HEAP_SIZE_MACRO
+   LS_HEAP_SIZE: LS_HEAP_SIZE_MACRO
+   HOST_IP: HOST_IP_MACRO
+   HOST_NAME: HOST_NAME_MACRO
+   NUM_CLUSTER_NODES: NUM_CLUSTER_NODES_MACRO
+  volumes:
+   - /var/opt/elk/log:/var/log/elk
+   - /opt/etcd/config:/opt/etcd/config
+   - /var/opt/elk/data:/var/lib/elasticsearch
+
+appObserverELK:
+  image: dockerrepo:5000/arrs/arrs-cloud-base-app-observer:2.1.0.2
+  restart: always
+  privileged: true
+  log_driver: "json-file"
+  log_opt:
+   max-size: "100m"
+   max-file: "10"
+  ports:
+   - "8575:8575"
+   - "8577:8577"
+  environment:
+   SECURE_PORT: 8575
+   NON_SECURE_PORT: 8577
+   PRODUCT_NAME: ELK
+   APP_WEBSERVICE_FQDN: HOST_IP_MACRO
+   APP_WEBSERVICE_PORT: 7505
+  volumes:
+   - /var/opt/app-observer-elk/config:/opt/app-observer/conf/external
+   - /var/opt/app-observer-elk/logs:/opt/app-observer/logs
+
+elkapp:
+  image: dockerrepo:5000/arrs/arrs-cloud-base-elk-app-monitor:1.0.0.1
+  stdin_open: true
+  tty: true
+  restart: always
+  privileged: true
+  log_driver: "json-file"
+  log_opt:
+   max-size: "100m"
+   max-file: "10"
+  ports:
+   - "7505:7505"
+  environment:
+   LISTEN_PORT: 7505 
+   HOST_IP: HOST_IP_MACRO
+   APP_OBSERVER_PORT: 8577
+  volumes:
+   - /var/opt/app-monitor-elk/logs:/opt/webservice/logs
+
+keymanager:
+  image: dockerrepo:5000/arrs/arrs-cloud-base-keymanager:2.0.0.2
+  stdin_open: true
+  tty: true
+  restart: always
+  privileged: true
+  log_driver: "json-file"
+  log_opt:
+   max-size: "100m"
+   max-file: "10"
+  environment:
+  - HOST_IP=HOST_IP_MACRO
+  - HOST_NAME=HOST_NAME_MACRO
+  volumes:
+   - /var/log:/tmp
+  volumes_from:
+  - elk

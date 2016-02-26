@@ -1,0 +1,56 @@
+{
+    "ossAttribution": {
+        "product": "elk",
+        "productVersion": "3.0.0.11",
+        "entries": [
+            {
+                "component": "Logstash",
+                "componentVersion": "2.1.1",
+                "componentUrl": "http://www.elastic.co",
+                "license": "Apache 2.0",
+                "licenseUrl": "licenses/apache-license-2.0.txt",
+                "notice": ""
+            },
+            {
+                "component": "ElasticSearch",
+                "componentVersion": "2.1.1",
+                "componentUrl": "http://www.elastic.co",
+                "license": "Apache 2.0",
+                "licenseUrl": "licenses/apache-license-2.0.txt",
+                "notice": ""
+            },
+            {
+                "component": "Kibana",
+                "componentVersion": "4.3.1",
+                "componentUrl": "http://www.elastic.co",
+                "license": "Apache 2.0",
+                "licenseUrl": "licenses/apache-license-2.0.txt",
+                "notice": ""
+            },
+            {
+                "component": "Curator",
+                "componentVersion": "3.4.0",
+                "componentUrl": "http://www.elastic.co",
+                "license": "Apache 2.0",
+                "licenseUrl": "licenses/apache-license-2.0.txt",
+                "notice": ""
+            },
+            {
+                "component": "logstash-forwarder",
+                "componentVersion": "0.3.1",
+                "componentUrl": "https://github.com/elasticsearch/logstash-forwarder/releases/tag/v0.3.1",
+                "license": "Apache 2.0",
+                "licenseUrl": "licenses/apache-license-2.0.txt",
+                "notice" : ""
+            },
+            {
+                "component": "kopf",
+                "componentVersion": "2.1.2",
+                "componentUrl": "https://github.com/lmenezes/elasticsearch-kopf/releases",
+                "license": "MIT",
+                "licenseUrl": "licenses/mit-license.txt",
+                "notice" : ""
+            }
+        ]
+    }
+}

@@ -1,0 +1,25 @@
+[	
+	{
+	 "Static":
+	  [
+	    {
+		"key": "/config/advisor/elk@$VarHostName",
+		"value": "$VarHostIP:8575"    
+	    },
+	    {
+        "key": "/productGroups/laas/elk@$VarHostName",
+        "value": "$VarHostIP"
+        }
+	  ],
+	  "KeepAlive" :
+	  [
+	    {
+	      "key": "/laas/elk/elk$VarHostIP",
+	      "value": "$VarHostIP",
+	      "healthcheck":"/opt/etcd/status_checkers/generic_key_checker.sh",
+	      "interval" :60,
+	      "initialdelay":300
+	    }
+	  ]
+	}
+]
